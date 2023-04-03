@@ -1,6 +1,6 @@
-import patientServices from "../services/patientServices";
+import patientServices from "../services/patientServices.js";
 
-async function create(req, res){
+async function create(req, res, next){
     const { name, email, password } = req.body;
 
     try {
@@ -11,7 +11,7 @@ async function create(req, res){
     }
 }
 
-async function signin(req, res){
+async function signin(req, res, next){
     const { email, password } = req.body;
 
     try {

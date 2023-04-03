@@ -24,7 +24,28 @@ async function signin({email, password}){
     return token;
 }
 
+async function getAll(){
+    const { rows, rowCount } = await doctorRepositories.getAll();
+    if(!rowCount) throw errors.notFoundError();
+    return rows;
+}
+
+async function searchSpecialty(specialty){
+    const { rows, rowCount } = await doctorRepositories.getSpecialties(specialty);
+    if(!rowCount) throw errors.notFoundError();
+    return rows;
+}
+
+async function searchLocation(location){
+    const { rows, rowCount } = await doctorRepositories.getOptions(location);
+    if(!rowCount) throw errors.notFoundError();
+    return rows;
+}
+
 export default {
     create,
-    signin
+    signin,
+    getAll,
+    searchSpecialty,
+    searchLocation
 }

@@ -13,7 +13,41 @@ async function create({name, email, password, specialty, location}){
         [name, email, password, specialty, location]);
 }
 
+async function findById(id) {
+    return await connectionDb.query(`    
+      SELECT * FROM doctors WHERE id = $1`,
+      [id]);
+}
+
+async function getAll(){
+    return await connectionDb.query(`    
+        SELECT d.name, d.specialty, d.location 
+        FROM doctors d`,
+    );
+}
+
+async function getSpecialties(specialty){
+    return await connectionDb.query(`    
+        SELECT d.name, d.specialty, d.location
+        FROM doctors d
+        WHERE d.specialty ILIKE $1`,
+    [`%${specialty}%`]);
+}
+
+async function getOptions(location){
+    return await connectionDb.query(`    
+        SELECT d.name, d.specialty, d.location
+        FROM doctors d
+        WHERE d.location ILIKE $1`,
+    [`%${location}%`]);
+}
+
+
 export default {
     findByEmail,
-    create
+    create,
+    findById,
+    getAll,
+    getSpecialties,
+    getOptions
 }
