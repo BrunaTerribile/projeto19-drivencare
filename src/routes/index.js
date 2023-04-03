@@ -3,6 +3,6 @@ import doctorRoutes from "./doctorRoutes.js";
 
 const routes = Router();
 
-routes.use("/doctors", doctorRoutes);
+routes.use('/doctors', doctorRoutes);
 
 export default routes;
